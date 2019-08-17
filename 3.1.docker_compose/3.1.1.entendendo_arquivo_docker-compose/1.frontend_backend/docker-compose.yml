@@ -1,0 +1,22 @@
+version: '3.1'
+
+services:
+  database:
+    image: mysql
+    environment:
+      MYSQL_DATABASE: treinadb
+      MYSQL_USER: treinauser
+      MYSQL_PASSWORD: treinapwd
+      MYSQL_ROOT_PASSWORD: treinapwdroot
+    volumes:
+      - database-db-data:/var/lib/mysql
+
+  frontend:
+    image: nginx
+    ports:
+      - "80:80"
+    depends_on:
+      - database
+
+volumes:
+  database-db-data: {}
